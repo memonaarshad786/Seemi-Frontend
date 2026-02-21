@@ -2,7 +2,7 @@ import { FaFacebookF, FaTwitter, FaLinkedinIn, FaInstagram, FaEnvelope, FaPhone 
 
 export default function FooterSection() {
   return (
-    <footer className="relative w-full text-white overflow-visible">
+    <footer className="relative w-full pt-35 text-white overflow-visible">
       {/* decorative image at the top that overlaps previous section */}
       <img
         src="/assets/thirdcomp/blue-background.png"
