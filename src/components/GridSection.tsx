@@ -1,5 +1,4 @@
 import { FaCheckSquare, FaTimes, FaStar } from "react-icons/fa";
-import { FiArrowRight } from "react-icons/fi";
 
 export default function GridSection() {
   return (
@@ -68,38 +67,102 @@ export default function GridSection() {
         </div>
 
         {/* CARD 2 */}
-        <div className="relative bg-[#FAFCEE] rounded-2xl p-8 flex flex-col gap-4 shadow-md hover:translate-y-[-4px] hover:shadow-lg transition">
-          <div className="w-15 h-15 flex items-center justify-center bg-white rounded-full text-gray-800 font-bold text-lg mb-2">
+        <div className="relative bg-[#FAFCEE] rounded-2xl p-8 flex flex-col gap-6 shadow-md hover:translate-y-[-4px] hover:shadow-lg transition">
+          <div className="w-12 h-12 flex items-center justify-center bg-white rounded-full text-gray-800 font-bold text-md mb-2">
             02
           </div>
-          <h3 className="text-lg font-bold text-gray-800 leading-snug">
+
+          <h3 className="text-2xl font-semibold text-gray-800">
             Billing & Payments
           </h3>
-          <p className="text-gray-600 text-sm leading-relaxed flex-grow">
+          <p className="text-gray-600 text-sm leading-relaxed max-w-lg">
             Generate and send invoices instantly, accept secure online payments
             through multiple gateways, and track outstanding balances with
             real-time financial insights.
           </p>
 
-          <div className="flex flex-col gap-4">
-            <div className="flex gap-2 items-center  rounded-md">
-              <img
-                src="/assets/thirdcomp/team-member.png"
-                alt="team"
-                className="h-18 w-full"
-              />
-                 <div className="">
- <img
-                src="/assets/thirdcomp/girl-image.png"
-                alt="team"
-                className="h-10 w-10 rounded-full object-cover"
-              />
-              <img
-                src="/assets/thirdcomp/Vector.png"
-                alt="decor"
-                className="h-10 w-10"
-              />                </div>
-             
+          {/* Inner card: Team Members Tracking */}
+          <div className="relative mt-4">
+            <div className=" rounded-xl shadow p-4 flex items-center gap-4 max-w-[520px]">
+              <div className="flex-1 bg-white">
+                <div className="flex items-center justify-between mb-2">
+                  <div>
+                    <h4 className="text-sm  text-gray-800">
+                      Team Members Tracking
+                    </h4>
+                    <p className="text-xs text-gray-400">Collaborative Space</p>
+                  </div>
+
+                  <div className="w-8 h-8 rounded-full flex items-center justify-center font-bold transform rotate-0">
+                    <img
+                      src="/assets/thirdcomp/green-arrow.png"
+                      alt="avatar-2"
+                      className=" rounded-full object-cover"
+                    />
+                  </div>
+                </div>
+
+                <div className="mt-2">
+                  <label className="relative block shadow-sm">
+                    <span className="sr-only">Search</span>
+                    <span className="absolute inset-y-0 left-3 flex items-center text-gray-400">
+                      <svg
+                        className="w-4 h-4"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="2"
+                          d="M21 21l-4.35-4.35M11 19a8 8 0 100-16 8 8 0 000 16z"
+                        />
+                      </svg>
+                    </span>
+                    <input
+                      className="pl-10 pr-4 py-2 w-full border border-gray-100 rounded-md text-sm bg-white"
+                      placeholder="Search"
+                    />
+                  </label>
+                </div>
+              </div>
+
+              <div className="flex flex-col items-center gap-3">
+                <img
+                  src="/assets/thirdcomp/girl-image.png"
+                  alt="avatar-2"
+                  className="w-10 h-10 rounded-full object-cover"
+                />
+                <img
+                  src="/assets/thirdcomp/Vector.png"
+                  alt="decor"
+                  className="w-8 h-8"
+                />
+              </div>
+            </div>
+          </div>
+
+          {/* user chip */}
+          <div className="max-w-[520px] w-full flex items-center gap-4 mt-4">
+            <img
+              src="/assets/thirdcomp/boy-image.png"
+              alt="avatar-2"
+              className="w-10 h-10 rounded-full object-cover"
+            />
+
+            <div className="bg-white rounded-lg shadow flex items-center gap-4 p-3 flex-1 min-w-0">
+              <div className="w-12 h-12 rounded-md bg-purple-600 text-white flex items-center justify-center font-bold flex-shrink-0">
+                NK
+              </div>
+              <div className="flex-1 min-w-0">
+                <div className="text-sm font-semibold text-gray-800 truncate">
+                  Nouman Khan
+                </div>
+                <div className="text-xs text-gray-400 truncate">
+                  mohammadnouman524@gmail.com
+                </div>
+              </div>
             </div>
           </div>
 
@@ -121,7 +184,10 @@ export default function GridSection() {
           </p>
 
           <div className="flex flex-col gap-4 mt-4 relative">
-            <FiArrowRight className="absolute right-0 w-5 h-5 text-yellow-500" />
+            <img
+              src="/assets/thirdcomp/Group.png"
+              className="absolute right-0 top-2 "
+            />
             <div className="flex flex-col gap-2 p-4 bg-white rounded-lg shadow-sm max-w-[460px]">
               <h4 className="text-gray-900 font-bold text-sm mb-1">
                 Tutor Feedback & Review
@@ -129,13 +195,35 @@ export default function GridSection() {
               <p className="text-gray-600 text-xs">
                 Offer feedback to students and parents in a structured manner.
               </p>
-              <a href="#" className="text-green-500 text-xs font-medium">
+              <a href="#" className="text-black text-xs font-medium">
                 View Details →
               </a>
             </div>
           </div>
-
-          <div className="absolute -bottom-8 -right-8 w-24 h-24 border-4 border-dotted border-green-400 rounded-full opacity-60"></div>
+          <div className="logo-section flex">
+            <img
+              src="/assets/thirdcomp/Seemii-Logo.png"
+              alt="seemli"
+              className="seemli-logo"
+            />
+            <div className="mini-cards flex">
+              <div className="mini-card mini-card--pink">
+                <div className="mini-card-top">Thus</div>
+                <div className="mini-card-bottom">08</div>
+              </div>
+              <div className="mini-card mini-card--white">
+                <div className="mini-card-top">Thus</div>
+                <div className="mini-card-bottom">08</div>
+              </div>
+            </div>
+          </div>
+          <div className="add-tutor">
+            <img src="/assets/thirdcomp/add-new-tutor.png" alt="add tutor" />
+          </div>
+          <div className="dashboard-info">
+            <img src="/assets/thirdcomp/tutor-mmm.png" alt="add tutor" />
+          </div>
+          <div className="absolute -bottom-8 -right-8 w-24 h-24 border-4 border-dotted border-teal-400 rounded-full opacity-60"></div>
         </div>
 
         {/* CARD 4 */}
@@ -159,18 +247,63 @@ export default function GridSection() {
                 Intuitive drag-and-drop calendar.
               </span>
             </div>
-            <div className="flex items-center gap-3 p-4 bg-white rounded-md">
-              <img
-                src="/assets/thirdcomp/team-member2.png"
-                alt="team"
-                className="h-10 w-10 rounded-full"
-              />
-              <FaTimes className="text-green-400 text-2xl" />
-              <img
-                src="/assets/thirdcomp/Vector.png"
-                alt="decor"
-                className="h-10 w-10"
-              />
+            <div className="relative mt-4">
+              <div className=" rounded-xl  p-4 flex items-center gap-4 max-w-[520px]">
+                <div className="flex-1 bg-white shadow p-2  rounded-sm">
+                  <div className="flex items-center justify-between mb-2">
+                    <div>
+                      <h4 className="text-sm  text-gray-800">
+                        Team Members Tracking
+                      </h4>
+                      <p className="text-xs text-gray-400">
+                        Collaborative Space
+                      </p>
+                    </div>
+
+                    <div className="w-8 h-8 rounded-full flex items-center justify-center font-bold transform rotate-0">
+                      <img
+                        src="/assets/thirdcomp/pink-arrow.png"
+                        alt="avatar-2"
+                        className=" rounded-full object-cover"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="mt-2">
+                    <label className="relative block shadow-sm">
+                      <span className="sr-only">Search</span>
+                      <span className="absolute inset-y-0 left-3 flex items-center text-gray-400">
+                        <svg
+                          className="w-4 h-4"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth="2"
+                            d="M21 21l-4.35-4.35M11 19a8 8 0 100-16 8 8 0 000 16z"
+                          />
+                        </svg>
+                      </span>
+                      <input
+                        className="pl-10 pr-4 py-2 w-full border border-gray-100 rounded-md text-sm bg-white"
+                        placeholder="Search"
+                      />
+                    </label>
+                  </div>
+                </div>
+
+                <div className="flex flex-col items-center gap-3">
+                  <FaTimes className="text-green-400 text-2xl" />
+                  <img
+                    src="/assets/thirdcomp/Vector.png"
+                    alt="decor"
+                    className="w-8 h-8"
+                  />
+                </div>
+              </div>
             </div>
             <div className="text-center text-yellow-400 text-2xl opacity-60">
               <FaStar />
@@ -193,19 +326,92 @@ export default function GridSection() {
             ensuring timely notifications, while keeping parents informed with
             regular progress updates for better engagement.
           </p>
-          <div className="flex flex-col gap-4 mt-4">
-            <div className="flex items-center gap-3 p-4 bg-white rounded-md">
-              <div className="bg-purple-700 text-white w-12 h-14 rounded-md flex flex-col items-center justify-center text-xs font-bold">
+          <div className="flex flex-col gap-4 ">
+            <div className="flex items-center gap-3 p-4 ">
+              <div className="bg-purple-700 text-white w-12 h-14 rounded-md flex flex-col items-center justify-center text-xs font-bold px-1">
                 <span>Thus</span>
                 <span>08</span>
               </div>
-              <img
-                src="/assets/thirdcomp/msg-member.png"
-                alt="msg"
-                className="h-10 w-10"
-              />
+              <div className="bg-white rounded-lg shadow flex items-center gap-4 p-3 flex-1 min-w-0">
+                <img
+                  src="/assets/thirdcomp/boy-image.png"
+                  alt="avatar-2"
+                  className="w-10 h-10 rounded-full object-cover"
+                />
+                <div className="flex-1 min-w-0">
+                  <div className="text-sm font-semibold text-gray-800 truncate">
+                    Nouman Khan
+                  </div>
+                  <div className="text-xs text-gray-400 truncate">
+                    mohammadnouman524@gmail.com
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
+          {/* Inner card: Team Members Tracking */}
+          <div className="relative mt-4">
+            <div className=" rounded-xl  p-4 flex items-center gap-4 max-w-[520px]">
+              <div className="flex-1 bg-white shadow p-2  rounded-sm">
+                <div className="flex items-center justify-between mb-2">
+                  <div>
+                    <h4 className="text-sm  text-gray-800">
+                      Team Members Tracking
+                    </h4>
+                    <p className="text-xs text-gray-400">Collaborative Space</p>
+                  </div>
+
+                  <div className="w-8 h-8 rounded-full flex items-center justify-center font-bold transform rotate-0">
+                    <img
+                      src="/assets/thirdcomp/green-arrow.png"
+                      alt="avatar-2"
+                      className=" rounded-full object-cover"
+                    />
+                  </div>
+                </div>
+
+                <div className="mt-2">
+                  <label className="relative block shadow-sm">
+                    <span className="sr-only">Search</span>
+                    <span className="absolute inset-y-0 left-3 flex items-center text-gray-400">
+                      <svg
+                        className="w-4 h-4"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="2"
+                          d="M21 21l-4.35-4.35M11 19a8 8 0 100-16 8 8 0 000 16z"
+                        />
+                      </svg>
+                    </span>
+                    <input
+                      className="pl-10 pr-4 py-2 w-full border border-gray-100 rounded-md text-sm bg-white"
+                      placeholder="Search"
+                    />
+                  </label>
+                </div>
+              </div>
+
+              <div className="flex flex-col items-center gap-3">
+                <img
+                  src="/assets/thirdcomp/girl-image.png"
+                  alt="avatar-2"
+                  className="w-10 h-10 rounded-full object-cover"
+                />
+                <img
+                  src="/assets/thirdcomp/Vector.png"
+                  alt="decor"
+                  className="w-8 h-8"
+                />
+              </div>
+            </div>
+          </div>
+
+          {/* user chip */}
 
           <div className="absolute -bottom-8 -right-8 w-24 h-24 border-4 border-dotted border-pink-500 rounded-full opacity-60"></div>
         </div>
@@ -225,7 +431,10 @@ export default function GridSection() {
           </p>
 
           <div className="flex flex-col gap-4 mt-4 relative">
-            <FiArrowRight className="absolute right-0 w-5 h-5 text-yellow-500" />
+            <img
+              src="/assets/thirdcomp/Group.png"
+              className="absolute right-0 top-2 "
+            />
             <div className="flex flex-col gap-2 p-4 bg-white rounded-lg shadow-sm max-w-[460px]">
               <h4 className="text-gray-900 font-bold text-sm mb-1">
                 Tutor Feedback & Review
@@ -233,11 +442,24 @@ export default function GridSection() {
               <p className="text-gray-600 text-xs">
                 Offer feedback to students and parents in a structured manner.
               </p>
-              <a href="#" className="text-yellow-500 text-xs font-medium">
+              <a href="#" className="text-black text-xs font-medium">
                 View Details →
               </a>
             </div>
           </div>
+          <div className="flex items-start gap-3 bg-white p-4 rounded-md rotate-1 relative mt-5">
+            <input type="checkbox" className="w-5 h-5" />
+            <div className="flex flex-col gap-1">
+              <span className="text-gray-800 font-medium text-sm">
+                Effortless Scheduling
+              </span>
+              <p className="text-gray-500 text-xs leading-snug">
+                Easily schedule lessons with an intuitive drag-and-drop
+                calendar.
+              </p>
+            </div>
+          </div>
+          <div className="w-1/2 h-2 bg-[#CF9D40] rounded mx-auto mt-2"></div>
 
           <div className="absolute -bottom-8 -right-8 w-24 h-24 border-4 border-dotted border-teal-400 rounded-full opacity-60"></div>
         </div>

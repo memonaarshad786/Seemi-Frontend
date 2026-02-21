@@ -2,11 +2,16 @@ import { FaFacebookF, FaTwitter, FaLinkedinIn, FaInstagram, FaEnvelope, FaPhone 
 
 export default function FooterSection() {
   return (
-    <footer
-      className="w-full bg-cover bg-top bg-no-repeat text-white pt-60 px-20 md:px-16 lg:px-24"
-      style={{ backgroundImage: `url(/assets/thirdcomp/blue-background.png)` }}
-    >
-      <div className="max-w-[1400px] mx-auto flex flex-col lg:flex-row justify-between gap-16">
+    <footer className="relative w-full text-white overflow-visible">
+      {/* decorative image at the top that overlaps previous section */}
+      <img
+        src="/assets/thirdcomp/blue-background.png"
+        alt="background cloud"
+        className="pointer-events-none absolute inset-0 w-full h-full object-cover opacity-100 z-0"
+      />
+
+      {/* content container placed above the image */}
+      <div className="relative z-20 max-w-[1400px] mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 py-12 px-6 md:py-16 md:px-16 lg:py-20 lg:px-24">
 
         {/* Left Section */}
         <div className="max-w-[320px] flex flex-col">
