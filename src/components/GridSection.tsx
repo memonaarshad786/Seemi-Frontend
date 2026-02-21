@@ -1,467 +1,511 @@
-import { FaCheckSquare, FaTimes, FaStar } from "react-icons/fa";
+import { useState } from "react";
+import { FaCheckSquare, FaTimes, FaEnvelope, FaSearch } from "react-icons/fa";
 
+// ── Reusable Search Bar ──
+const SearchBar = () => (
+  <div className="flex items-center gap-2 bg-gray-50 border border-gray-100 rounded-lg px-3 py-2">
+    <FaSearch className="text-gray-300 text-[10px] flex-shrink-0" />
+    <span className="text-[11px] text-gray-300">Search</span>
+  </div>
+);
+
+// ── Sparkle Star SVG ──
+const Star = ({ color = "#7B61FF", size = 20 }) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 20 20"
+    fill={color}
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path d="M10 0 L11.8 8.2 L20 10 L11.8 11.8 L10 20 L8.2 11.8 L0 10 L8.2 8.2 Z" />
+  </svg>
+);
+
+// ── Avatar with graceful gradient fallback ──
+const Avatar = ({
+  src,
+  alt = "",
+  className = "",
+  fallback = "from-orange-200 to-amber-300",
+}: {
+  src: string;
+  alt?: string;
+  className?: string;
+  fallback?: string;
+}) => {
+  const [hasError, setHasError] = useState(false);
+  if (hasError) {
+    return <div className={`${className} bg-gradient-to-br ${fallback}`} />;
+  }
+  return (
+    <img
+      src={src}
+      alt={alt}
+      className={className}
+      onError={() => setHasError(true)}
+    />
+  );
+};
+
+// ── Badge number circle ──
+const Badge = ({
+  num,
+  bg = "bg-white",
+}: {
+  num: string | number;
+  bg?: string;
+}) => (
+  <div
+    className={`w-9 h-9 flex items-center justify-center ${bg} rounded-full shadow-sm text-gray-700 font-bold text-[13px] mb-5 flex-shrink-0`}
+  >
+    {num}
+  </div>
+);
+
+// ── Dotted ring decoration ──
+const DottedRing = ({ color = "border-purple-400" }) => (
+  <div
+    className={`absolute -bottom-8 -right-8 w-24 h-24 border-[3px] border-dashed ${color} rounded-full opacity-60 pointer-events-none`}
+  />
+);
+
+// ── Team Members Tracking inner panel (reused in cards 2, 4, 5) ──
+const TeamTrackingPanel = ({}) => (
+  <div className="flex-1 bg-white border border-gray-100 rounded-2xl shadow-sm p-3">
+    <div className="flex items-start justify-between mb-3">
+      <div>
+        <div className="text-[12px] font-semibold text-gray-800">
+          Team Members Tracking
+        </div>
+        <div className="text-[10px] text-gray-400">Collaborative Space</div>
+      </div>
+      <img
+        src="/assets/thirdcomp/green-arrow.png"
+        alt="avatar-2"
+        className=" rounded-full object-cover"
+      />
+    </div>
+    <SearchBar />
+  </div>
+);
+const TeamTrackingPanelPink = ({}) => (
+  <div className="flex-1 bg-white border border-gray-100 rounded-2xl shadow-sm p-3">
+    <div className="flex items-start justify-between mb-3">
+      <div>
+        <div className="text-[12px] font-semibold text-gray-800">
+          Team Members Tracking
+        </div>
+        <div className="text-[10px] text-gray-400">Collaborative Space</div>
+      </div>
+      <img
+        src="/assets/thirdcomp/pink-arrow.png"
+        alt="avatar-2"
+        className=" rounded-full object-cover"
+      />
+    </div>
+    <SearchBar />
+  </div>
+);
+
+// ── Feedback card (reused in cards 3 and 6) ──
+const FeedbackCard = ({
+  girlFallback = "from-pink-200 to-rose-400",
+  boyFallback = "from-blue-200 to-blue-400",
+}) => (
+  <div className="relative bg-white border border-gray-100 rounded-2xl shadow-sm p-3 mb-4 pr-24">
+    <div className="text-[12px] font-bold text-gray-900 mb-1">
+      Tutor Feedback & Review
+    </div>
+    <p className="text-[10px] text-gray-500 leading-snug mb-1.5">
+      Offer feedback to students and parents in a structured manner.
+    </p>
+    <a href="#" className="text-[10px] text-gray-800 font-medium">
+      View Details →
+    </a>
+    <div className="absolute right-2 top-2 flex gap-1">
+      <Avatar
+        src="/assets/thirdcomp/girl-image.png"
+        className="w-9 h-9 rounded-lg object-cover"
+        fallback={girlFallback}
+      />
+      <Avatar
+        src="/assets/thirdcomp/boy-image.png"
+        className="w-9 h-9 rounded-lg object-cover"
+        fallback={boyFallback}
+      />
+    </div>
+    <span className="absolute -top-2.5 right-20 text-yellow-400 text-xl leading-none">
+      ✦
+    </span>
+  </div>
+);
+
+// ════════════════════════════════════════════════
+//  MAIN COMPONENT
+// ════════════════════════════════════════════════
 export default function GridSection() {
   return (
-    <section className="bg-gradient-to-br from-[#e8dff5] to-[#f0ebf8] py-16 px-8 md:px-24 min-h-auto">
-      <div className="text-left mb-16 max-w-3xl">
-        <span className="inline-block text-xs font-bold tracking-widest text-[#26C485] uppercase mb-4">
+    <section className="bg-gradient-to-br from-[#e8dff5] to-[#f0ebf8] py-14 px-6 md:px-14 lg:px-20">
+      {/* Section Header */}
+      <div className="mb-10 max-w-3xl">
+        <span className="text-[11px] font-bold tracking-widest text-[#26C485] uppercase mb-3 block">
           PERFORMANCE INSIGHTS
         </span>
-        <h2 className="text-4xl font-bold text-gray-800 my-4 leading-snug">
+        <h2 className="text-[30px] font-bold text-gray-900 leading-tight mb-3">
           Seamless Business Integrations
         </h2>
-        <p className="text-gray-600 leading-relaxed mt-6">
+        <p className="text-gray-500 text-[13px] leading-relaxed">
           Seemi seamlessly integrates with popular payment gateways like Stripe,
           allowing businesses to process transactions securely and efficiently.
         </p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 max-w-[1400px] mx-auto">
-        {/* CARD 1 */}
-        <div className="relative bg-[#FEECEC] rounded-2xl p-8 flex flex-col gap-4 shadow-md hover:translate-y-[-4px] hover:shadow-lg transition">
-          <div className="w-15 h-15 flex items-center justify-center bg-white rounded-full text-gray-800 font-bold text-lg mb-2">
-            01
-          </div>
-          <h3 className="text-lg font-bold text-gray-800 leading-snug">
+      {/* 3-column Card Grid */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 max-w-[1080px]">
+        {/* ══ CARD 1 · Lesson Scheduling & Calendar ══ */}
+        <div className="relative bg-[#FEECEC] rounded-3xl p-6 flex flex-col shadow-sm hover:-translate-y-1 hover:shadow-lg transition-all duration-200">
+          <Badge num="01" />
+
+          <h3 className="text-[17px] font-bold text-gray-900 mb-2 leading-snug">
             Lesson Scheduling & Calendar
           </h3>
-          <p className="text-gray-600 text-sm leading-relaxed flex-grow">
+          <p className="text-gray-500 text-[12px] leading-relaxed mb-5">
             Effortlessly organize and manage lessons with an intuitive
-            drag-and-drop calendar designed for ultimate convenience.
+            drag‑and‑drop calendar designed for ultimate convenience.
           </p>
 
-          <div className="flex flex-col gap-5 mt-2">
-            <div className="flex items-start gap-3 bg-white p-4 rounded-md -rotate-1 relative">
-              <FaCheckSquare className="text-yellow-400 text-xl" />
-              <span className="text-gray-800 font-medium text-sm">
+          <div className="flex flex-col gap-3 mt-auto">
+            {/* Yellow checkbox row */}
+            <div className="flex items-center gap-2 bg-white border border-gray-100 rounded-xl px-3 py-2.5 shadow-sm -rotate-1">
+              <FaCheckSquare className="text-yellow-400 text-[15px] flex-shrink-0" />
+              <span className="text-gray-800 font-medium text-[12px]">
                 Intuitive drag-and-drop calendar.
               </span>
             </div>
 
-            <div className="flex items-start gap-3 bg-white p-4 rounded-md -rotate-2 relative">
-              <input type="checkbox" className="w-5 h-5" />
-              <span className="text-gray-800 font-medium text-sm">
-                Manage Tutor Availability
-              </span>
-              <FaTimes className="absolute right-6 top-1/2 transform -translate-y-1/2 text-green-400 text-2xl cursor-not-allowed" />
-            </div>
-
-            <div className="flex items-start gap-3 bg-white p-4 rounded-md rotate-1 relative mt-5">
-              <input type="checkbox" className="w-5 h-5" />
-              <div className="flex flex-col gap-1">
-                <span className="text-gray-800 font-medium text-sm">
-                  Effortless Scheduling
+            {/* Unchecked + X row */}
+            <div className="flex items-center justify-between bg-white border border-gray-100 rounded-xl px-3 py-2.5 shadow-sm -rotate-1">
+              <div className="flex items-center gap-2">
+                <div className="w-4 h-4 border-2 border-gray-300 rounded-sm flex-shrink-0" />
+                <span className="text-gray-800 font-medium text-[12px]">
+                  Manage Tutor Availability
                 </span>
-                <p className="text-gray-500 text-xs leading-snug">
-                  Easily schedule lessons with an intuitive drag-and-drop
-                  calendar.
-                </p>
               </div>
+              <FaTimes className="text-green-400 text-[15px]" />
             </div>
 
-            <div className="w-1/2 h-2 bg-green-400 rounded mx-auto mt-2"></div>
+            {/* Two-line tilted card */}
+            <div className="bg-white border border-gray-100 rounded-xl px-3 py-3 shadow-sm rotate-1">
+              <div className="flex items-start gap-2">
+                <div className="w-4 h-4 border-2 border-gray-300 rounded-sm flex-shrink-0 mt-0.5" />
+                <div>
+                  <div className="text-gray-800 font-semibold text-[12px]">
+                    Effortless Scheduling
+                  </div>
+                  <p className="text-gray-400 text-[11px] leading-snug mt-0.5">
+                    Easily schedule lessons with an intuitive drag-and-drop
+                    calendar.
+                  </p>
+                </div>
+              </div>
+              <div className="w-1/2 h-2 bg-green-400 rounded mx-auto mt-2"></div>
+            </div>
           </div>
 
-          {/* dotted border circle */}
-          <div className="absolute -bottom-8 -right-8 w-24 h-24 border-4 border-dotted border-purple-400 rounded-full opacity-60"></div>
+          <div className="absolute bottom-6 left-5">
+            <Star color="#7B61FF" size={22} />
+          </div>
+          <DottedRing color="border-purple-400" />
         </div>
 
-        {/* CARD 2 */}
-        <div className="relative bg-[#FAFCEE] rounded-2xl p-8 flex flex-col gap-6 shadow-md hover:translate-y-[-4px] hover:shadow-lg transition">
-          <div className="w-12 h-12 flex items-center justify-center bg-white rounded-full text-gray-800 font-bold text-md mb-2">
-            02
-          </div>
+        {/* ══ CARD 2 · Billing & Payments ══ */}
+        <div className="relative bg-[#FAFCEE] rounded-3xl p-6 flex flex-col shadow-sm hover:-translate-y-1 hover:shadow-lg transition-all duration-200">
+          <Badge num="02" />
 
-          <h3 className="text-2xl font-semibold text-gray-800">
+          <h3 className="text-[17px] font-bold text-gray-900 mb-2 leading-snug">
             Billing & Payments
           </h3>
-          <p className="text-gray-600 text-sm leading-relaxed max-w-lg">
+          <p className="text-gray-500 text-[12px] leading-relaxed mb-5">
             Generate and send invoices instantly, accept secure online payments
             through multiple gateways, and track outstanding balances with
             real-time financial insights.
           </p>
 
-          {/* Inner card: Team Members Tracking */}
-          <div className="relative mt-4">
-            <div className=" rounded-xl shadow p-4 flex items-center gap-4 max-w-[520px]">
-              <div className="flex-1 bg-white">
-                <div className="flex items-center justify-between mb-2">
-                  <div>
-                    <h4 className="text-sm  text-gray-800">
-                      Team Members Tracking
-                    </h4>
-                    <p className="text-xs text-gray-400">Collaborative Space</p>
-                  </div>
-
-                  <div className="w-8 h-8 rounded-full flex items-center justify-center font-bold transform rotate-0">
-                    <img
-                      src="/assets/thirdcomp/green-arrow.png"
-                      alt="avatar-2"
-                      className=" rounded-full object-cover"
-                    />
-                  </div>
-                </div>
-
-                <div className="mt-2">
-                  <label className="relative block shadow-sm">
-                    <span className="sr-only">Search</span>
-                    <span className="absolute inset-y-0 left-3 flex items-center text-gray-400">
-                      <svg
-                        className="w-4 h-4"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth="2"
-                          d="M21 21l-4.35-4.35M11 19a8 8 0 100-16 8 8 0 000 16z"
-                        />
-                      </svg>
-                    </span>
-                    <input
-                      className="pl-10 pr-4 py-2 w-full border border-gray-100 rounded-md text-sm bg-white"
-                      placeholder="Search"
-                    />
-                  </label>
-                </div>
-              </div>
-
-              <div className="flex flex-col items-center gap-3">
-                <img
-                  src="/assets/thirdcomp/girl-image.png"
-                  alt="avatar-2"
-                  className="w-10 h-10 rounded-full object-cover"
-                />
-                <img
-                  src="/assets/thirdcomp/Vector.png"
-                  alt="decor"
-                  className="w-8 h-8"
-                />
-              </div>
+          {/* Team tracking + girl avatar */}
+          <div className="flex items-start gap-3 mb-4">
+            <TeamTrackingPanel />
+            <div className="flex flex-col items-center gap-2 pt-1 flex-shrink-0">
+              <Avatar
+                src="/assets/thirdcomp/girl-image.png"
+                className="w-10 h-10 rounded-full object-cover"
+                fallback="from-orange-200 to-amber-300"
+              />
+              <img
+                src="/assets/thirdcomp/Vector.png"
+                alt="decor"
+                className="w-8 h-8"
+              />
             </div>
           </div>
 
-          {/* user chip */}
-          <div className="max-w-[520px] w-full flex items-center gap-4 mt-4">
-            <img
+          {/* User chip row */}
+          <div className="flex items-center gap-2">
+            <Avatar
               src="/assets/thirdcomp/boy-image.png"
-              alt="avatar-2"
-              className="w-10 h-10 rounded-full object-cover"
+              className="w-9 h-9 rounded-full object-cover flex-shrink-0"
+              fallback="from-amber-200 to-orange-300"
             />
-
-            <div className="bg-white rounded-lg shadow flex items-center gap-4 p-3 flex-1 min-w-0">
-              <div className="w-12 h-12 rounded-md bg-purple-600 text-white flex items-center justify-center font-bold flex-shrink-0">
+            <div className="flex items-center gap-2 bg-white border border-gray-100 rounded-2xl shadow-sm px-3 py-2 flex-1 min-w-0">
+              <div className="w-9 h-9 rounded-xl bg-purple-600 text-white flex items-center justify-center font-bold text-[11px] flex-shrink-0">
                 NK
               </div>
-              <div className="flex-1 min-w-0">
-                <div className="text-sm font-semibold text-gray-800 truncate">
+              <div className="min-w-0 flex-1">
+                <div className="text-[12px] font-semibold text-gray-800 truncate">
                   Nouman Khan
                 </div>
-                <div className="text-xs text-gray-400 truncate">
+                <div className="text-[10px] text-gray-400 truncate">
                   mohammadnouman524@gmail.com
                 </div>
               </div>
+              <FaEnvelope className="text-gray-300 text-[12px] flex-shrink-0" />
             </div>
           </div>
 
-          <div className="absolute -bottom-8 -right-8 w-24 h-24 border-4 border-dotted border-blue-400 rounded-full opacity-60"></div>
+          <DottedRing color="border-blue-400" />
         </div>
 
-        {/* CARD 3 */}
-        <div className="relative bg-[#E9F5FF] rounded-2xl p-7 flex flex-col gap-4 shadow-md hover:translate-y-[-4px] hover:shadow-lg transition">
-          <div className="w-15 h-15 flex items-center justify-center bg-white rounded-full text-gray-800 font-bold text-lg mb-2">
-            03
-          </div>
-          <h3 className="text-lg font-bold text-gray-800 leading-snug">
+        {/* ══ CARD 3 · Student & Lesson Tracking ══ */}
+        <div className="relative bg-[#E9F5FF] rounded-3xl p-6 flex flex-col shadow-sm hover:-translate-y-1 hover:shadow-lg transition-all duration-200">
+          <Badge num="03" />
+
+          <h3 className="text-[17px] font-bold text-gray-900 mb-2 leading-snug">
             Student & Lesson Tracking
           </h3>
-          <p className="text-gray-600 text-sm leading-relaxed flex-grow">
+          <p className="text-gray-500 text-[12px] leading-relaxed mb-4">
             Maintain detailed lesson logs and progress reports, track attendance
-            and performance metrics, and provide valuable feedback to students
+            and performance metrics, and provide structured feedback to students
             and parents.
           </p>
 
-          <div className="flex flex-col gap-4 mt-4 relative">
-            <img
-              src="/assets/thirdcomp/Group.png"
-              className="absolute right-0 top-2 "
-            />
-            <div className="flex flex-col gap-2 p-4 bg-white rounded-lg shadow-sm max-w-[460px]">
-              <h4 className="text-gray-900 font-bold text-sm mb-1">
-                Tutor Feedback & Review
-              </h4>
-              <p className="text-gray-600 text-xs">
-                Offer feedback to students and parents in a structured manner.
-              </p>
-              <a href="#" className="text-black text-xs font-medium">
-                View Details →
-              </a>
+          <FeedbackCard
+            girlFallback="from-pink-200 to-rose-400"
+            boyFallback="from-blue-200 to-blue-400"
+          />
+
+          {/* Seemii logo + date badges */}
+          <div className="flex items-center gap-3 mb-3">
+            <div className="flex items-center gap-1 text-white rounded-lg px-2.5 py-1.5 text-[11px] font-bold flex-shrink-0">
+              <img
+                src="/assets/thirdcomp/Seemii-Logo.png"
+                alt="seemli"
+                className="seemli-logo"
+              />
             </div>
-          </div>
-          <div className="logo-section flex">
-            <img
-              src="/assets/thirdcomp/Seemii-Logo.png"
-              alt="seemli"
-              className="seemli-logo"
-            />
-            <div className="mini-cards flex">
-              <div className="mini-card mini-card--pink">
-                <div className="mini-card-top">Thus</div>
-                <div className="mini-card-bottom">08</div>
+            <div className="flex gap-1.5">
+              <div className="bg-purple-600 text-white rounded-lg px-2.5 py-1.5 text-center text-[10px] font-bold leading-snug">
+                <div>Thus</div>
+                <div>08</div>
               </div>
-              <div className="mini-card mini-card--white">
-                <div className="mini-card-top">Thus</div>
-                <div className="mini-card-bottom">08</div>
+              <div className="bg-white border border-gray-200 text-gray-700 rounded-lg px-2.5 py-1.5 text-center text-[10px] font-bold leading-snug shadow-sm">
+                <div>Thus</div>
+                <div>08</div>
               </div>
             </div>
           </div>
-          <div className="add-tutor">
-            <img src="/assets/thirdcomp/add-new-tutor.png" alt="add tutor" />
+
+          {/* Add New Tutor */}
+          <div className="flex items-center justify-center gap-1.5 bg-white border border-dashed border-gray-200 rounded-xl px-3 py-2 mb-3 shadow-sm">
+            <span className="text-gray-400 text-[11px]">+</span>
+            <span className="text-gray-400 text-[11px] font-medium">
+              Add New Tutor
+            </span>
           </div>
-          <div className="dashboard-info">
-            <img src="/assets/thirdcomp/tutor-mmm.png" alt="add tutor" />
+
+          {/* Tutor Dashboard row */}
+          <div className="flex items-center justify-between bg-white border border-gray-100 rounded-xl px-3 py-2.5 shadow-sm">
+            <div className="flex items-center gap-2">
+              <div className="w-6 h-6 bg-emerald-50 rounded-lg flex items-center justify-center text-[10px]">
+                📊
+              </div>
+              <div>
+                <div className="text-[11px] font-semibold text-gray-800">
+                  Tutor Dashboard
+                </div>
+                <div className="text-[9px] text-gray-400">Nav Nav</div>
+              </div>
+            </div>
+            <div className="flex gap-4 text-[9px] text-right">
+              <div>
+                <div className="text-gray-400">Class</div>
+                <div className="text-gray-500 text-[8px]">In Progress</div>
+              </div>
+              <div>
+                <div className="text-gray-400">Tar</div>
+                <div className="font-bold text-gray-700 text-[10px]">555</div>
+              </div>
+            </div>
           </div>
-          <div className="absolute -bottom-8 -right-8 w-24 h-24 border-4 border-dotted border-teal-400 rounded-full opacity-60"></div>
+
+          <DottedRing color="border-teal-400" />
         </div>
 
-        {/* CARD 4 */}
-        <div className="relative bg-[#ECFEF1] rounded-2xl p-8 flex flex-col gap-4 shadow-md hover:translate-y-[-4px] hover:shadow-lg transition">
-          <div className="w-15 h-15 flex items-center justify-center bg-white rounded-full text-gray-800 font-bold text-lg mb-2">
-            04
-          </div>
-          <h3 className="text-lg font-bold text-gray-800 leading-snug">
+        {/* ══ CARD 4 · Parents & Students Portal ══ */}
+        <div className="relative bg-[#ECFEF1] rounded-3xl p-6 flex flex-col shadow-sm hover:-translate-y-1 hover:shadow-lg transition-all duration-200">
+          <Badge num="04" />
+
+          <h3 className="text-[17px] font-bold text-gray-900 mb-2 leading-snug">
             Parents & Students Portal
           </h3>
-          <p className="text-gray-600 text-sm leading-relaxed flex-grow">
-            Provide secure portal access for students to view schedules,
-            progress reports, and payments, while enabling direct messaging for
-            seamless communication.
+          <p className="text-gray-500 text-[12px] leading-relaxed mb-5">
+            Provide an easy-to-use dashboard for parents and students to view
+            schedules, progress reports, and payments, while enabling direct
+            messaging for seamless communication.
           </p>
 
-          <div className="flex flex-col gap-4 mt-4">
-            <div className="flex items-center gap-3 p-4 bg-white rounded-md">
-              <FaCheckSquare className="text-yellow-400 text-xl" />
-              <span className="text-gray-800 font-medium text-sm">
-                Intuitive drag-and-drop calendar.
-              </span>
+          {/* Yellow solid checkbox row */}
+          <div className="flex items-center gap-2 bg-white border border-gray-100 rounded-xl px-3 py-2.5 shadow-sm -rotate-1 mb-4">
+            <div className="w-5 h-5 bg-yellow-400 rounded flex items-center justify-center flex-shrink-0">
+              <svg className="w-3 h-3" viewBox="0 0 12 12" fill="none">
+                <path
+                  d="M2 6l3 3 5-5"
+                  stroke="white"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
             </div>
-            <div className="relative mt-4">
-              <div className=" rounded-xl  p-4 flex items-center gap-4 max-w-[520px]">
-                <div className="flex-1 bg-white shadow p-2  rounded-sm">
-                  <div className="flex items-center justify-between mb-2">
-                    <div>
-                      <h4 className="text-sm  text-gray-800">
-                        Team Members Tracking
-                      </h4>
-                      <p className="text-xs text-gray-400">
-                        Collaborative Space
-                      </p>
-                    </div>
+            <span className="text-gray-800 font-medium text-[12px]">
+              Intuitive drag-and-drop calendar.
+            </span>
+          </div>
 
-                    <div className="w-8 h-8 rounded-full flex items-center justify-center font-bold transform rotate-0">
-                      <img
-                        src="/assets/thirdcomp/pink-arrow.png"
-                        alt="avatar-2"
-                        className=" rounded-full object-cover"
-                      />
-                    </div>
-                  </div>
-
-                  <div className="mt-2">
-                    <label className="relative block shadow-sm">
-                      <span className="sr-only">Search</span>
-                      <span className="absolute inset-y-0 left-3 flex items-center text-gray-400">
-                        <svg
-                          className="w-4 h-4"
-                          fill="none"
-                          stroke="currentColor"
-                          viewBox="0 0 24 24"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth="2"
-                            d="M21 21l-4.35-4.35M11 19a8 8 0 100-16 8 8 0 000 16z"
-                          />
-                        </svg>
-                      </span>
-                      <input
-                        className="pl-10 pr-4 py-2 w-full border border-gray-100 rounded-md text-sm bg-white"
-                        placeholder="Search"
-                      />
-                    </label>
-                  </div>
-                </div>
-
-                <div className="flex flex-col items-center gap-3">
-                  <FaTimes className="text-green-400 text-2xl" />
-                  <img
-                    src="/assets/thirdcomp/Vector.png"
-                    alt="decor"
-                    className="w-8 h-8"
-                  />
-                </div>
-              </div>
-            </div>
-            <div className="text-center text-yellow-400 text-2xl opacity-60">
-              <FaStar />
+          {/* Team tracking + X + curl */}
+          <div className="flex items-start gap-3">
+            <TeamTrackingPanelPink />
+            <div className="flex flex-col items-center gap-3 pt-2 flex-shrink-0">
+              <FaTimes className="text-green-400 text-[18px]" />
+              <img
+                src="/assets/thirdcomp/Vector.png"
+                alt="decor"
+                className="w-8 h-8"
+              />
             </div>
           </div>
 
-          <div className="absolute -bottom-8 -right-8 w-24 h-24 border-4 border-dotted border-yellow-500 rounded-full opacity-60"></div>
+          <div className="absolute bottom-5 left-5">
+            <Star color="#7B61FF" size={22} />
+          </div>
+          <DottedRing color="border-yellow-500" />
         </div>
 
-        {/* CARD 5 */}
-        <div className="relative bg-[#EEEEFC] rounded-2xl p-8 flex flex-col gap-4 shadow-md hover:translate-y-[-4px] hover:shadow-lg transition">
-          <div className="w-15 h-15 flex items-center justify-center bg-white rounded-full text-gray-800 font-bold text-lg mb-2">
-            05
-          </div>
-          <h3 className="text-lg font-bold text-gray-800 leading-snug">
+        {/* ══ CARD 5 · Automated Communication ══ */}
+        <div className="relative bg-[#EEEEFC] rounded-3xl p-6 flex flex-col shadow-sm hover:-translate-y-1 hover:shadow-lg transition-all duration-200">
+          <Badge num="05" />
+
+          <h3 className="text-[17px] font-bold text-gray-900 mb-2 leading-snug">
             Automated Communication
           </h3>
-          <p className="text-gray-600 text-sm leading-relaxed flex-grow">
+          <p className="text-gray-500 text-[12px] leading-relaxed mb-5">
             Send automated email and SMS reminders for lessons and payments,
             ensuring timely notifications, while keeping parents informed with
             regular progress updates for better engagement.
           </p>
-          <div className="flex flex-col gap-4 ">
-            <div className="flex items-center gap-3 p-4 ">
-              <div className="bg-purple-700 text-white w-12 h-14 rounded-md flex flex-col items-center justify-center text-xs font-bold px-1">
-                <span>Thus</span>
-                <span>08</span>
-              </div>
-              <div className="bg-white rounded-lg shadow flex items-center gap-4 p-3 flex-1 min-w-0">
-                <img
-                  src="/assets/thirdcomp/boy-image.png"
-                  alt="avatar-2"
-                  className="w-10 h-10 rounded-full object-cover"
-                />
-                <div className="flex-1 min-w-0">
-                  <div className="text-sm font-semibold text-gray-800 truncate">
-                    Nouman Khan
-                  </div>
-                  <div className="text-xs text-gray-400 truncate">
-                    mohammadnouman524@gmail.com
-                  </div>
-                </div>
-              </div>
+
+          {/* Purple date block + user chip */}
+          <div className="flex items-center gap-3 mb-4">
+            <div className="bg-purple-600 text-white rounded-xl px-3 py-2.5 text-center text-[11px] font-bold leading-snug flex-shrink-0">
+              <div>Thus</div>
+              <div>08</div>
             </div>
-          </div>
-          {/* Inner card: Team Members Tracking */}
-          <div className="relative mt-4">
-            <div className=" rounded-xl  p-4 flex items-center gap-4 max-w-[520px]">
-              <div className="flex-1 bg-white shadow p-2  rounded-sm">
-                <div className="flex items-center justify-between mb-2">
-                  <div>
-                    <h4 className="text-sm  text-gray-800">
-                      Team Members Tracking
-                    </h4>
-                    <p className="text-xs text-gray-400">Collaborative Space</p>
-                  </div>
-
-                  <div className="w-8 h-8 rounded-full flex items-center justify-center font-bold transform rotate-0">
-                    <img
-                      src="/assets/thirdcomp/green-arrow.png"
-                      alt="avatar-2"
-                      className=" rounded-full object-cover"
-                    />
-                  </div>
+            <div className="flex items-center gap-2 bg-white border border-gray-100 rounded-2xl shadow-sm px-3 py-2 flex-1 min-w-0">
+              <Avatar
+                src="/assets/thirdcomp/boy-image.png"
+                className="w-8 h-8 rounded-full object-cover flex-shrink-0"
+                fallback="from-amber-200 to-orange-300"
+              />
+              <div className="min-w-0 flex-1">
+                <div className="text-[11px] font-semibold text-gray-800 truncate">
+                  Nouman Khan
                 </div>
-
-                <div className="mt-2">
-                  <label className="relative block shadow-sm">
-                    <span className="sr-only">Search</span>
-                    <span className="absolute inset-y-0 left-3 flex items-center text-gray-400">
-                      <svg
-                        className="w-4 h-4"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth="2"
-                          d="M21 21l-4.35-4.35M11 19a8 8 0 100-16 8 8 0 000 16z"
-                        />
-                      </svg>
-                    </span>
-                    <input
-                      className="pl-10 pr-4 py-2 w-full border border-gray-100 rounded-md text-sm bg-white"
-                      placeholder="Search"
-                    />
-                  </label>
+                <div className="text-[10px] text-gray-400 truncate">
+                  mohammadnouman524@gmail.com
                 </div>
               </div>
-
-              <div className="flex flex-col items-center gap-3">
-                <img
-                  src="/assets/thirdcomp/girl-image.png"
-                  alt="avatar-2"
-                  className="w-10 h-10 rounded-full object-cover"
-                />
-                <img
-                  src="/assets/thirdcomp/Vector.png"
-                  alt="decor"
-                  className="w-8 h-8"
-                />
-              </div>
+              <FaEnvelope className="text-gray-300 text-[11px] flex-shrink-0" />
             </div>
           </div>
 
-          {/* user chip */}
+          {/* Team tracking + girl avatar + curl */}
+          <div className="flex items-start gap-3">
+            <TeamTrackingPanel />
+            <div className="flex flex-col items-center gap-2 pt-1 flex-shrink-0">
+              <Avatar
+                src="/assets/thirdcomp/girl-image.png"
+                className="w-10 h-10 rounded-full object-cover"
+                fallback="from-pink-200 to-rose-300"
+              />
+              <img
+                src="/assets/thirdcomp/Vector.png"
+                alt="decor"
+                className="w-8 h-8"
+              />
+            </div>
+          </div>
 
-          <div className="absolute -bottom-8 -right-8 w-24 h-24 border-4 border-dotted border-pink-500 rounded-full opacity-60"></div>
+          <DottedRing color="border-pink-500" />
+          <div className="absolute -bottom-5 -left-5 w-16 h-16 border-[3px] border-dashed border-blue-200 rounded-full opacity-45 pointer-events-none" />
         </div>
 
-        {/* CARD 6 */}
-        <div className="relative bg-[#FBEEEE] rounded-2xl p-8 flex flex-col gap-4 shadow-md hover:translate-y-[-4px] hover:shadow-lg transition">
-          <div className="w-15 h-15 flex items-center justify-center bg-white rounded-full text-gray-800 font-bold text-lg mb-2">
-            06
-          </div>
-          <h3 className="text-lg font-bold text-gray-800 leading-snug">
+        {/* ══ CARD 6 · Business Reports & Insights ══ */}
+        <div className="relative bg-[#FBEEEE] rounded-3xl p-6 flex flex-col shadow-sm hover:-translate-y-1 hover:shadow-lg transition-all duration-200">
+          <Badge num="06" />
+
+          <h3 className="text-[17px] font-bold text-gray-900 mb-2 leading-snug">
             Business Reports & Insights
           </h3>
-          <p className="text-gray-600 text-sm leading-relaxed flex-grow">
+          <p className="text-gray-500 text-[12px] leading-relaxed mb-4">
             Gain valuable insights into your business operations with our
             in-depth reporting tools. Track performance, monitor growth, and
             make data-driven decisions with ease.
           </p>
 
-          <div className="flex flex-col gap-4 mt-4 relative">
-            <img
-              src="/assets/thirdcomp/Group.png"
-              className="absolute right-0 top-2 "
-            />
-            <div className="flex flex-col gap-2 p-4 bg-white rounded-lg shadow-sm max-w-[460px]">
-              <h4 className="text-gray-900 font-bold text-sm mb-1">
-                Tutor Feedback & Review
-              </h4>
-              <p className="text-gray-600 text-xs">
-                Offer feedback to students and parents in a structured manner.
-              </p>
-              <a href="#" className="text-black text-xs font-medium">
-                View Details →
-              </a>
-            </div>
-          </div>
-          <div className="flex items-start gap-3 bg-white p-4 rounded-md rotate-1 relative mt-5">
-            <input type="checkbox" className="w-5 h-5" />
-            <div className="flex flex-col gap-1">
-              <span className="text-gray-800 font-medium text-sm">
-                Effortless Scheduling
-              </span>
-              <p className="text-gray-500 text-xs leading-snug">
-                Easily schedule lessons with an intuitive drag-and-drop
-                calendar.
-              </p>
-            </div>
-          </div>
-          <div className="w-1/2 h-2 bg-[#CF9D40] rounded mx-auto mt-2"></div>
+          <FeedbackCard
+            girlFallback="from-pink-200 to-rose-400"
+            boyFallback="from-amber-100 to-orange-300"
+          />
 
-          <div className="absolute -bottom-8 -right-8 w-24 h-24 border-4 border-dotted border-teal-400 rounded-full opacity-60"></div>
+          {/* Effortless Scheduling – tilted */}
+          <div className="bg-white border border-gray-100 rounded-2xl shadow-sm px-4 py-3 mb-4 rotate-1">
+            <div className="flex items-start gap-2">
+              <div className="w-4 h-4 border-2 border-gray-300 rounded-sm flex-shrink-0 mt-0.5" />
+              <div>
+                <div className="text-gray-800 font-semibold text-[12px]">
+                  Effortless Scheduling
+                </div>
+                <p className="text-gray-400 text-[11px] leading-snug mt-0.5">
+                  Easily schedule lessons with an intuitive drag-and-drop
+                  calendar.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Tutor Dashboard row */}
+          <div className="flex items-center gap-3 bg-white border border-gray-100 rounded-2xl shadow-sm px-3 py-2.5">
+            <div className="w-7 h-7 bg-emerald-50 rounded-lg flex items-center justify-center text-[10px] flex-shrink-0">
+              📊
+            </div>
+            <div>
+              <div className="text-[11px] font-semibold text-gray-800">
+                Tutor Dashboard
+              </div>
+              <div className="text-[9px] text-gray-400">Nav Nav</div>
+            </div>
+          </div>
+
+          <DottedRing color="border-teal-400" />
         </div>
       </div>
     </section>
