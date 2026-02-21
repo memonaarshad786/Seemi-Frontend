@@ -5,7 +5,7 @@ export default function GridSection() {
   return (
     <section className="bg-gradient-to-br from-[#e8dff5] to-[#f0ebf8] py-16 px-8 md:px-24 min-h-auto">
       <div className="text-left mb-16 max-w-3xl">
-        <span className="inline-block text-xs font-bold tracking-widest text-green-500 uppercase mb-4">
+        <span className="inline-block text-xs font-bold tracking-widest text-[#26C485] uppercase mb-4">
           PERFORMANCE INSIGHTS
         </span>
         <h2 className="text-4xl font-bold text-gray-800 my-4 leading-snug">
@@ -81,14 +81,15 @@ export default function GridSection() {
             real-time financial insights.
           </p>
 
-          <div className="flex flex-col gap-4 mt-4">
-            <div className="flex gap-2 items-center p-4 bg-white rounded-md">
+          <div className="flex flex-col gap-4">
+            <div className="flex gap-2 items-center  rounded-md">
               <img
                 src="/assets/thirdcomp/team-member.png"
                 alt="team"
-                className="h-10 w-10 rounded-full object-cover"
+                className="h-18 w-full"
               />
-              <img
+                 <div className="">
+ <img
                 src="/assets/thirdcomp/girl-image.png"
                 alt="team"
                 className="h-10 w-10 rounded-full object-cover"
@@ -97,7 +98,8 @@ export default function GridSection() {
                 src="/assets/thirdcomp/Vector.png"
                 alt="decor"
                 className="h-10 w-10"
-              />
+              />                </div>
+             
             </div>
           </div>
 

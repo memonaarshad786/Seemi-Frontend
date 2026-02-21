@@ -1,18 +1,18 @@
-import { FaCalendarAlt } from "react-icons/fa"
+import { FaCalendarAlt } from "react-icons/fa";
 
 export default function FeatureShowcase() {
   const handleBookDemo = () => {
-    console.log("Book a demo clicked")
-  }
+    console.log("Book a demo clicked");
+  };
 
   return (
-    <section className="bg-gradient-to-b from-[#f5f7fb] to-[#fafbfc] pb-12 px-8  flex flex-col">
-
+    <section className="bg-gradient-to-b from-white via-white  to-[#e8dff5] pb-12 px-8 flex flex-col">
       {/* Top Section */}
       <div className="flex items-center justify-center gap-6 mb-12 text-center flex-col md:flex-row">
         <p className="text-[0.95rem] italic text-[#4a5568] leading-[1.6] max-w-[800px]">
-          Gain valuable insights into your business operations with our in-depth reporting tools.
-          Track performance, monitor growth, and make data-driven decisions with ease.
+          Gain valuable insights into your business operations with our in-depth
+          reporting tools. Track performance, monitor growth, and make
+          data-driven decisions with ease.
         </p>
       </div>
 
@@ -23,11 +23,9 @@ export default function FeatureShowcase() {
 
       {/* Main Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-16 max-w-[1300px] mx-auto items-center md:gap-8">
-
         {/* Left Side */}
         <div className="flex justify-center items-center">
           <div className="relative w-full h-[500px] flex items-center justify-center lg:h-[400px] md:h-[300px]">
-
             {/* Orange Dotted Circle */}
             <div className="absolute bottom-[100px] w-[300px] h-[300px] border-[4px] border-dashed border-[#FFB84D] rounded-full opacity-60 z-10"></div>
 
@@ -42,7 +40,6 @@ export default function FeatureShowcase() {
 
         {/* Right Side */}
         <div className="p-8 flex flex-col gap-6 lg:p-4">
-
           {/* Header */}
           <div className="flex flex-col gap-3">
             <span className="text-[0.75rem] font-bold tracking-[2px] text-[#1abc9c] uppercase">
@@ -58,15 +55,16 @@ export default function FeatureShowcase() {
           {/* Content */}
           <div className="flex flex-col gap-4">
             <p className="text-[1rem] text-[#4a5568] leading-[1.7] md:text-[0.9rem]">
-              Effortlessly organize and manage lessons with an intuitive drag-and-drop calendar
-              designed for ultimate convenience. Set up recurring sessions, adjust tutor
-              availability with ease, and minimize missed appointments using automated
-              reminders.
+              Effortlessly organize and manage lessons with an intuitive
+              drag-and-drop calendar designed for ultimate convenience. Set up
+              recurring sessions, adjust tutor availability with ease, and
+              minimize missed appointments using automated reminders.
             </p>
 
             <p className="text-[0.95rem] text-[#718096] leading-[1.6] md:text-[0.85rem]">
-              This streamlined scheduling system ensures a smooth experience for both
-              students and tutors, reducing administrative burdens and maximizing efficiency.
+              This streamlined scheduling system ensures a smooth experience for
+              both students and tutors, reducing administrative burdens and
+              maximizing efficiency.
             </p>
           </div>
 
@@ -78,8 +76,7 @@ export default function FeatureShowcase() {
             Book a Demo
           </button>
         </div>
-
       </div>
     </section>
-  )
+  );
 }
