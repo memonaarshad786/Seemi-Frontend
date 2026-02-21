@@ -161,7 +161,25 @@ export default function LandingHero() {
       const data = await response.json();
 
       if (!response.ok) {
-        setError(data.message || "Sign up failed");
+        // If backend returned field-specific messages, merge them into form errors
+        if (data && data.messages && typeof data.messages === "object") {
+          const serverMessages: Record<string, any> = data.messages;
+          // normalize values to strings
+          const normalizedErrors: Record<string, string> = {};
+          Object.entries(serverMessages).forEach(([k, v]) => {
+            if (Array.isArray(v)) normalizedErrors[k] = v.join(" ");
+            else if (typeof v === "object") normalizedErrors[k] = JSON.stringify(v);
+            else normalizedErrors[k] = String(v);
+          });
+          setErrors((prev) => ({ ...prev, ...normalizedErrors }));
+
+          // Show a concise top-level message as well
+          const topMsg = Object.values(normalizedErrors).join(" ");
+          setError(topMsg || data.message || "Sign up failed");
+        } else {
+          setError(data.message || "Sign up failed");
+        }
+
         return;
       }
 
